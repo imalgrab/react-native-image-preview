@@ -4,13 +4,13 @@ import {
   Dimensions,
   Image,
   Pressable,
+  StatusBar,
   StyleSheet,
 } from 'react-native';
 import {
   Gesture,
   GestureDetector,
   GestureHandlerRootView,
-  Text,
 } from 'react-native-gesture-handler';
 import Animated, {
   FadeIn,
@@ -35,11 +35,9 @@ export function ImageModal(props: ImageModalProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const scale = useSharedValue(1);
-  const imageAnimatedStyles = useAnimatedStyle(() => {
-    return {
-      transform: [{ scale: scale.value }],
-    };
-  });
+  const animatedStyles = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
 
   const doubleTap = Gesture.Tap()
     .maxDuration(250)
@@ -67,12 +65,11 @@ export function ImageModal(props: ImageModalProps) {
       exiting={FadeOut}
       style={styles.modalContainer}
     >
+      <StatusBar />
       <GestureHandlerRootView>
         <GestureDetector gesture={doubleTap}>
-          <Animated.View style={[styles.modalContent, imageAnimatedStyles]}>
-            <Pressable style={styles.dismissButton} onPress={onDismiss}>
-              <Text>X</Text>
-            </Pressable>
+          <Animated.View style={[styles.modalContent, animatedStyles]}>
+            <Pressable style={styles.dismissButton} onPress={onDismiss} />
             {isLoading && (
               <ActivityIndicator size={'large'} style={styles.spinner} />
             )}
@@ -104,15 +101,15 @@ const styles = StyleSheet.create({
   modalContent: {
     flex: 1,
     justifyContent: 'center',
-    gap: 16,
   },
   dismissButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
     backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: 'black',
+    alignSelf: 'flex-end',
+    right: 16,
+    bottom: 16,
   },
   spinner: {
     position: 'absolute',
