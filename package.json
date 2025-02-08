@@ -183,5 +183,10 @@
     "languages": "js",
     "type": "library",
     "version": "0.48.0"
+  },
+  "dependencies": {
+    "react-native-gesture-handler": "^2.23.0",
+    "react-native-reanimated": "^3.16.7",
+    "react-native-safe-area-context": "^5.2.0"
   }
 }

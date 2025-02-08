@@ -1,3 +1,6 @@
-export function multiply(a: number, b: number): number {
-  return a * b;
-}
+import { ImagePreview } from './ImagePreview';
+import type { ImagePreviewProps } from './utils';
+
+export type { ImagePreviewProps };
+
+export default ImagePreview;
